@@ -1,0 +1,66 @@
+[
+  {
+    "id": "PROD-001",
+    "name": "Manzana Roja",
+    "aliases": ["manzana", "manzanas", "manzana roja", "manzanas rojas"],
+    "price": 15.50,
+    "unit": "kg",
+    "stock": 100
+  },
+  {
+    "id": "PROD-002",
+    "name": "Leche Entera 1L",
+    "aliases": ["leche", "leche entera", "litro de leche", "leche 1l"],
+    "price": 28.00,
+    "unit": "unidad",
+    "stock": 50
+  },
+  {
+    "id": "PROD-003",
+    "name": "Manzana Verde",
+    "aliases": ["manzana verde", "manzanas verdes", "manzana granny smith"],
+    "price": 18.00,
+    "unit": "kg",
+    "stock": 80
+  },
+  {
+    "id": "PROD-004",
+    "name": "Pan Integral",
+    "aliases": ["pan", "pan integral", "pan de centeno"],
+    "price": 35.00,
+    "unit": "unidad",
+    "stock": 30
+  },
+  {
+    "id": "PROD-005",
+    "name": "Huevos Docena",
+    "aliases": ["huevos", "huevos docena", "docena de huevos", "huevos blancos"],
+    "price": 45.00,
+    "unit": "docena",
+    "stock": 60
+  },
+  {
+    "id": "PROD-006",
+    "name": "Arroz 1kg",
+    "aliases": ["arroz", "arroz blanco", "kilos de arroz", "arroz 1kg"],
+    "price": 22.00,
+    "unit": "kg",
+    "stock": 100
+  },
+  {
+    "id": "PROD-007",
+    "name": "Aceite Vegetal 1L",
+    "aliases": ["aceite", "aceite vegetal", "litro de aceite", "aceite 1l"],
+    "price": 38.00,
+    "unit": "unidad",
+    "stock": 40
+  },
+  {
+    "id": "PROD-008",
+    "name": "Azúcar 1kg",
+    "aliases": ["azucar", "azúcar", "azucar 1kg", "kilo de azucar"],
+    "price": 19.50,
+    "unit": "kg",
+    "stock": 75
+  }
+]
