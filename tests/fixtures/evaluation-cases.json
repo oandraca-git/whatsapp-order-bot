@@ -1,0 +1,12 @@
+[
+  { "input": "quiero 2 kilos de manzana", "expectedIntent": "ADD", "expectedItems": [{ "productId": "PROD-001", "quantity": 2, "unit": "kg" }] },
+  { "input": "necesito 1 leche y 3 manzanas", "expectedIntent": "ADD", "expectedItems": [{ "productId": "PROD-002", "quantity": 1 }, { "productId": "PROD-001", "quantity": 3 }] },
+  { "input": "dame 5 lehe", "expectedIntent": "ADD", "expectedItems": [{ "productId": "PROD-002", "quantity": 5 }] },
+  { "input": "ver carrito", "expectedIntent": "VIEW", "expectedItems": [] },
+  { "input": "confirmar pedido", "expectedIntent": "CHECKOUT", "expectedItems": [] },
+  { "input": "cancelar todo", "expectedIntent": "CANCEL", "expectedItems": [] },
+  { "input": "ayuda", "expectedIntent": "HELP", "expectedItems": [] },
+  { "input": "quita la manzana", "expectedIntent": "REMOVE", "expectedItems": [] },
+  { "input": "quiero 1 pan", "expectedIntent": "ADD", "expectedItems": [{ "productId": "PROD-004", "quantity": 1 }] },
+  { "input": "dame 2 huevos", "expectedIntent": "ADD", "expectedItems": [{ "productId": "PROD-005", "quantity": 2 }] }
+]
