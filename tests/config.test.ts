@@ -1,5 +1,5 @@
-import { loadConfig } from '../src/config/index.js';
-import { Config } from '../src/config/schema.js';
+import { loadConfig } from '../src/config/index.ts';
+import { Config } from '../src/config/schema.ts';
 
 describe('Config Loader', () => {
   const originalEnv = { ...process.env };
