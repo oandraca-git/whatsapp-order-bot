@@ -24,9 +24,10 @@ export class ResponseFormatter {
     
     const lines = ['✅ *Agregué al carrito:*'];
     for (const item of items) {
-      lines.push(`• ${item.quantity} ${item.unit} ${item.productName} = ${this.formatCurrency(item.subtotal)}`);
+      const subtotal = item.subtotal ?? (item.unitPrice ?? 0) * item.quantity;
+      lines.push(`• ${item.quantity} ${item.unit} ${item.productName} = ${this.formatCurrency(subtotal)}`);
     }
-    const total = items.reduce((sum, item) => sum + item.subtotal, 0);
+    const total = items.reduce((sum, item) => sum + (item.subtotal ?? (item.unitPrice ?? 0) * item.quantity), 0);
     lines.push(`\n*Total parcial: ${this.formatCurrency(total)}*`);
     lines.push('\n¿Algo más? (escribe "confirmar" para finalizar)');
     return lines.join('\n');

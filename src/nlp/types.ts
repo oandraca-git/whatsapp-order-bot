@@ -5,6 +5,8 @@ export interface ExtractedItem {
   unit: string;
   confidence: number;
   matchedAlias: string;
+  unitPrice?: number;
+  subtotal?: number;
 }
 
 export interface ExtractedOrder {

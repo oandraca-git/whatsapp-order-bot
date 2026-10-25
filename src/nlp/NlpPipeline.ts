@@ -195,27 +195,23 @@ export class NlpPipeline {
 
   private extractProductNames(text: string): string[] {
     const names: string[] = [];
-    const allProducts = this.catalog.getAll();
+    const words = text.split(/\s+/);
     
-    // Sort aliases by length descending to match longer phrases first
-    const allAliases: Array<{alias: string; productId: string}> = [];
-    for (const product of allProducts) {
-      for (const alias of [product.name, ...product.aliases]) {
-        allAliases.push({ alias: alias.toLowerCase(), productId: product.id });
-      }
-    }
-    allAliases.sort((a, b) => b.alias.length - a.alias.length);
-
-    const matchedProducts = new Set<string>();
-    for (const { alias, productId } of allAliases) {
-      if (matchedProducts.has(productId)) continue;
-      
-      if (text.includes(alias)) {
-        names.push(alias);
-        matchedProducts.add(productId);
+    // Try n-grams (1-3 words) and search catalog
+    for (let n = 3; n >= 1; n--) {
+      for (let i = 0; i <= words.length - n; i++) {
+        const ngram = words.slice(i, i + n).join(' ');
+        const searchResults = this.catalog.search(ngram);
+        if (searchResults.length > 0) {
+          const bestMatch = searchResults[0];
+          if (bestMatch.score >= 0.5) {
+            names.push(bestMatch.matchedAlias);
+          }
+        }
       }
     }
     
-    return names;
+    // Deduplicate
+    return [...new Set(names)];
   }
 }

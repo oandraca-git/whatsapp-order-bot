@@ -9,7 +9,7 @@ export class SessionManager {
   private sessions: Map<string, Session> = new Map();
   private catalog: CatalogService;
   private config: SessionManagerConfig;
-  private cleanupInterval: ReturnType<typeof setInterval>;
+  private cleanupInterval?: ReturnType<typeof setInterval>;
 
   constructor(catalog: CatalogService, config: SessionManagerConfig) {
     this.catalog = catalog;
