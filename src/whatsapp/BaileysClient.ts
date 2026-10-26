@@ -9,6 +9,7 @@ import { ResponseFormatter } from '../formatter/ResponseFormatter.js';
 import { Config } from '../config/schema.js';
 import { BaileysClientDeps } from './types.js';
 import { ExtractedOrder } from '../nlp/types.js';
+import qrcodeTerminal from 'qrcode-terminal';
 
 const logger = pino({ level: 'silent' });
 
@@ -40,19 +41,33 @@ export class BaileysClient {
       logger,
     });
 
-    this.socket.ev.on('connection.update', (update) => {
-      const { connection, lastDisconnect } = update;
-      if (connection === 'close') {
-        const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut;
-        this.isConnectedFlag = false;
-        if (shouldReconnect) {
-          setTimeout(() => this.start(), 5000);
-        }
-      } else if (connection === 'open') {
-        this.isConnectedFlag = true;
-        console.log('WhatsApp conectado');
-      }
-    });
+   this.socket.ev.on('connection.update', (update) => {
+  const { connection, lastDisconnect, qr } = update;
+  
+  if (qr) {
+    console.log('\n┌──────────────────────────────────────────────┐');
+    console.log('│  📱 ESCANEA EL CÓDIGO QR CON WHATSAPP        │');
+    console.log('└──────────────────────────────────────────────┘\n');
+    qrcodeTerminal.generate(qr, { small: true });
+    console.log('\n⏳ Esperando escaneo...\n');
+  }
+  
+  if (connection === 'close') {
+    const statusCode = (lastDisconnect?.error as Boom)?.output?.statusCode;
+    const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
+    this.isConnectedFlag = false;
+    
+    if (shouldReconnect) {
+      console.log('🔄 Conexión perdida, reconectando en 5 segundos...');
+      setTimeout(() => this.start(), 5000);
+    } else {
+      console.log('🚫 Sesión cerrada (logged out). Ejecuta: rmdir /s auth && npm run dev');
+    }
+  } else if (connection === 'open') {
+    this.isConnectedFlag = true;
+    console.log('✅ WhatsApp conectado correctamente');
+  }
+});
 
     this.socket.ev.on('creds.update', saveCreds);
 
